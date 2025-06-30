@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="/fonts/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="flex flex-col lg:flex-row min-h-screen" id="form-2">
+        <div class="absolute top-4 right-6 z-50">
+            <i class="fa-solid fa-xmark text-2xl text-gray-600 hover:text-black cursor-pointer" id="closeLogInBtn"></i>
+        </div>
+        <div class="hidden lg:block">
+            <img src="/img/sign_in_img.png" alt="" class="w-[768px] h-full object-cover">
+        </div>
+        <div class="flex-1 flex items-center justify-center px-4 py-12">
+            <div class="w-full max-w-[575px] space-y-8">
+                <div class="flex space-x-6 items-center">
+                    <div class="flex space-x-6 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#586380]">
+                                <a href="/register">Đăng ký</a>
+                            </h3>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-[#2E3856]">
+                            <a href="/logIn">Đăng nhập</a>
+                            </h3>
+                            <img src="/img/underline_img.svg" alt="" class="mx-auto">
+                        </div>
+                    </div>
+                </div>
+                <form action="/logIn/store" method="post" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-medium text-[#586380]">Email</label>
+                            <input type="email" id="email" name="email" placeholder="ten@gmail.com" class="w-full h-[50px] bg-[#F6F7FB] rounded-md text-[#939BB4] px-3 outline-purple-800 font-medium">
+                            <span class="form-message text-red-600 text-xs"></span>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-medium text-[#586380]">Mật khẩu</label>
+                            <input type="password" id="password" name="password" placeholder="......" class="w-full h-[50px] bg-[#F6F7FB] rounded-md text-[#939BB4] px-3 outline-purple-800 font-medium">
+                            <span class="form-message text-red-600 text-xs"></span>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-purple-400 hover:bg-purple-800 rounded-3xl text-xl font-semibold text-white transition duration-200">
+                            Đăng nhập
+                        </button>
+                        <button class="w-full py-4 border-2 border-inherit rounded-3xl text-xl hover:bg-[#cecece] transition duration-200">
+                            <a href="/register">Mới sử dụng WordEase? Tạo tài khoản</a>
+                        </button>
+                    </form>
+            </div>
+        </div>
+    </div>
+    {{!-- notificationModal --}}
+    <div class="bg-black/30 fixed inset-0 z-50 hidden" id="notificationModal">
+        <div class="bg-purple-600 w-[210px] h-[210px] rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+            <div class="bg-white w-[210px] h-[210px] mx-auto rounded-2xl z-0 absolute top-6">
+                <div class="px-6 py-4 bg-[#EBEAE8] rounded-full z-[1] top-[-50px] left-16 absolute">
+                    <i class="fa-solid fa-bell text-4xl text-purple-600"></i>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+                    <h3 class="text-2xl text-purple-600 font-medium">Notification</h3>
+                    <span class="text-center" id="modalMessage">...</span>
+                    <div class="flex">
+                        <button type="button" class="px-4 py-1 bg-gray-300 hover:bg-gray-500 text-black rounded-full closeModalBtn">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/validation.js"></script>
+    <script>
+        validation({
+            form:'#form-2',
+            errorSelector: '.form-message',
+            rules: [
+                validation.isRequired('#email'),
+                validation.isEmail('#email'),
+                validation.isRequired('#password'),
+                validation.isPassWord('#password', 'Mật khẩu phải bao gồm chữ thường, chữ hoa, kí tự đặc biệt và độ dài từ 6-16 kí tự'),
+            ],
+            onsubmit: function(data) {
+                document.querySelector('#form-2 form').submit();
+            }
+        })
+    </script>
+    <script src="/js/logIn.js"></script>
+    <script>
+        window.SHOW_NOTIFICATION_MAIL = {{#if showNotificationMail}}true{{else}}false{{/if}};
+        window.SHOW_NOTIFICATION_PASSWORD = {{#if showNotificationPassword}}true{{else}}false{{/if}};
+    </script>
+</body>
+</html>

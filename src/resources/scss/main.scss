@@ -1,0 +1,151 @@
+/* Banner */
+.banner {
+    background-color: rgba(244,248,211,0.6);
+    width: 100%;
+    height: 500px;
+}
+
+.img__banner {
+    width: 600px;
+}
+
+/* Search history */
+.search {
+    position: relative;
+}
+
+.search__history {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  border: 1px solid #dedede;
+  display: none;
+}
+
+.search__history-content a {
+    border: 1px solid #dedede;
+}
+
+/* Create */
+.create {
+    position: relative;
+}
+
+.create__content {
+    position: absolute;
+    border: 1px solid #dedede;
+    right: 20px;
+    display: none;
+    width: 150px;
+}
+
+.user__content {
+    display: none;
+    right: 1px;
+}
+
+.user__content::before {
+    position: absolute;
+    content: "";
+    width: 60px;
+    height:16px;
+    background-color: transparent;
+    top: -7px;
+    right: 1px;
+    cursor: pointer;
+}
+
+.user:hover .user__content {
+    display: block;
+}
+
+
+/* advertisement */
+.ad__item {
+    width: 510px;
+    height: 70px;
+}
+
+/* My library */
+.library {
+    position: relative;
+}
+
+.separate::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 2px;
+    top: 30px;
+    left: 0;
+    background-color: #dedede;
+}
+
+/* flashCard */
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d; 
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; 
+  border-radius: 0.5rem;
+}
+
+.flip-front {
+  z-index: 2;
+  background-color: white;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+  background-color: #f3e8ff;
+}
+
+.flashcard-slide {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.flashcard-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100%);
+}
+
+.flashcard-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.chart-container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding-top: 30px;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}

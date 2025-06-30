@@ -1,0 +1,125 @@
+<div class="container max-w-[1400px] mx-auto space-y-8 overflow-x-hidden">
+    <div class="max-w-[1400px] mx-auto">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 px-4">
+            <h2 class="text-4xl font-bold bg-gradient-to-r from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent">{{set.set_name}}</h2>
+            <div class="space-x-4 relative">
+                <button id="editBtn" class="px-4 py-2 border-solid border-2 border-purple-800 rounded-3xl hover:bg-gray-400/50">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div id="editContent" class="edit absolute sm:right-0 sm:left-auto left-1/2 -translate-x-1/2 sm:translate-x-0 top-14 z-50 min-w-[160px] max-w-[90vw] bg-white border border-gray-300 rounded-xl py-2 px-4 sm:px-2 space-y-4 shadow-lg hidden transition-all duration-200 ease-in-out">
+                    <div class="hover:text-gray-500">
+                        <a href="/me/stored/sets/{{set._id}}/edit" class="flex items-center gap-2">
+                            <i class="fa-solid fa-pen"></i>
+                            Sửa
+                        </a>
+                    </div>
+                    <div class="hover:text-gray-500">
+                        <a href="#" class="modal-link flex items-center gap-2" data-id="{{set._id}}" data-modal-id="notificationDeleteModal">
+                            <i class="fa-solid fa-trash-can"></i>
+                            Xóa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- các thẻ học, kiểm tra -->
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+        <a href="/lesson/{{set._id}}" class="w-full h-[110px] bg-[#F6F7FB] text-center py-4 rounded-md shadow-md hover:border-b-4 border-solid border-purple-800 cursor-pointer block">
+            <img src="/img/study.png" alt="" class="w-[30px] mx-auto mb-4">
+            <span class="mt-4">Học</span>
+        </a>
+        <a href="/test/{{set._id}}" class="w-full">
+            <button class="w-full h-[110px] bg-[#F6F7FB] text-center py-4 rounded-md shadow-md hover:border-b-4 border-solid border-purple-800 cursor-pointer">
+                <img src="/img/test.png" alt="" class="w-[30px] mx-auto mb-4">
+                <span class="mt-4">Kiểm tra</span>
+            </button>
+        </a>
+    </div>
+        <!-- flash card -->
+    <div class="relative w-full h-[420px] overflow-hidden rounded-lg shadow-lg">
+        {{#each flashcards}}
+        <div class="flip-wrapper flashcard flashcard-slide {{#unless @first}} flashcard-hidden {{else}} flashcard-visible {{/unless}}" style="height: 420px;">
+            <div class="flip-card">
+                <!-- mặt trước -->
+                <div class="flip-front bg-[#FFF4EA]/30 border rounded-lg flex flex-col p-4">
+                    <div class="p-4 h-full flex flex-col">
+                        <div class="flex-1 flex justify-center items-center">
+                            <h2 class="text-4xl font-medium">{{this.word}}</h2>
+                        </div>
+                        <div class="flex justify-center items-center gap-2">
+                            {{#if this.transcription}}
+                                <h3 class="text-lg italic text-gray-600">{{this.transcription}}</h3>
+                            {{/if}}
+
+                            {{#if this.audio}}
+                                <button onclick="playAudio(event, '{{this.audio}}')" title="Phát âm" class="text-purple-700 hover:text-purple-900">
+                                <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            {{/if}}
+                        </div>
+                        <div>
+                            {{#if this.example_img}}
+                                <img src="{{this.example_img}}" alt="Image" class="w-[200px] mx-auto">
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <!-- mặt sau -->
+                <div class="flip-back bg-purple-100 border shadow-xl rounded-lg flex justify-center items-center p-4">
+                    <h2 class="text-3xl font-semibold text-purple-800 text-center">{{this.meaning}}</h2>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+        <!-- button chuyển flash card -->
+    <div class="text-center space-x-4">
+        <button class="text-4xl border-solid border-2 border-purple-800 px-4 py-1 rounded-3xl hover:bg-gray-400/50"><i class="fa-solid fa-arrow-left"></i></button>
+        <button class="text-4xl border-solid border-2 border-purple-800 px-4 py-1 rounded-3xl hover:bg-gray-400/50"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</div>
+
+
+{{!-- Xóa học phần --}}
+<div class="bg-black/30 fixed inset-0 z-50 hidden" id="notificationDeleteModal">
+    <form method="post" action="/editfolder/stored/sets/{{set._id}}?_method=DELETE" class="flex justify-center items-center min-h-screen">
+        <div class="bg-purple-600 w-[210px] h-[210px] mx-auto rounded-2xl relative">
+            <div class="bg-white w-[210px] h-[210px] mx-auto rounded-2xl z-0 absolute top-6">
+                <div class="px-6 py-4 bg-[#EBEAE8] rounded-full z-[1] top-[-50px] left-16 absolute">
+                    <i class="fa-solid fa-bell text-4xl text-purple-600"></i>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+                    <h3 class="text-2xl text-purple-600 font-medium">Notification</h3>
+                    <span class="text-center">Bạn có chắn chắn muốn xóa học phần này?</span>
+                    <div class="flex space-x-4">
+                        <button type="submit" class="px-4 py-1 bg-purple-600 text-white rounded-full hover:bg-purple-800">Okay</button>
+                        <button type="button" class="px-4 py-1 bg-gray-300 hover:bg-gray-500 text-black rounded-full closeModalBtn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{{!-- NotiticationModal --}}
+<div class="bg-black/30 fixed inset-0 z-50 hidden" id="notificationModal">
+    <div class="bg-purple-600 w-[210px] h-[210px] rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+        <div class="bg-white w-[210px] h-[210px] mx-auto rounded-2xl z-0 absolute top-6">
+            <div class="px-6 py-4 bg-[#EBEAE8] rounded-full z-[1] top-[-50px] left-16 absolute">
+                <i class="fa-solid fa-bell text-4xl text-purple-600"></i>
+            </div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+                <h3 class="text-2xl text-purple-600 font-medium">Notification</h3>
+                <span class="text-center">Không tìm thấy học phần</span>
+                <div class="flex">
+                    <button type="button" class="px-4 py-1 bg-gray-300 hover:bg-gray-500 text-black rounded-full closeModalBtn">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/flashcard.js"></script>
+<script src="/js/notification.js"></script>

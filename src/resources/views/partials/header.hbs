@@ -1,0 +1,100 @@
+<header class="bg-[linear-gradient(to_top,_rgba(244,_248,_211,_0.6),_rgba(255,_255,_255,_0.1))] w-full h-20 lg:h-36 flex flex-wrap lg:flex-nowrap justify-between items-center px-4 relative z-30">
+    <!-- Logo -->
+    <a href="/home">
+        <img src="/img/logo_1.png" alt="" class="w-32 h-16 lg:w-48 lg:h-full object-contain">
+    </a>
+
+    <!-- Navigation -->
+    <nav class="hidden lg:flex gap-2">
+        <a href="/home" class="text-purple-800 hover:bg-purple-200 px-4 py-2 rounded-md font-medium">Home</a>
+        <a href="/myLibrary" class="text-purple-800 hover:bg-purple-200 px-4 py-2 rounded-md font-medium">My library</a>
+        <a href="/feedback" class="text-purple-800 hover:bg-purple-200 px-4 py-2 rounded-md font-medium">Feedback</a>
+        <a href="/aboutUs" class="text-purple-800 hover:bg-purple-200 px-4 py-2 rounded-md font-medium">About us</a>
+    </nav>
+
+    <!-- Menu Mobile -->
+    <button id="menuToggle" class="lg:hidden text-2xl text-purple-800 cursor-pointer order-last ml-auto relative">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    <nav id="sideNav" class="absolute top-14 right-0 w-64 max-w-[80vw] h-[210px] bg-white shadow-lg rounded-md transform translate-x-full transition-transform duration-300">
+        <button id="menuClose" class="self-end text-2xl m-4 absolute right-0"><i class="fa-solid fa-xmark"></i></button>
+        <div class="flex flex-col space-y-3 px-6 py-8">
+            <a href="/home" class="link font-medium">Home</a>
+            <a href="/myLibrary" class="link font-medium">My Library</a>
+            <a href="/feedback" class="link font-medium">Feedback</a>
+            <a href="/aboutUs" class="link font-medium">About Us</a>
+            <a href="/pay" class="link font-medium">Nâng cấp tài khoản</a>
+        </div>
+    </nav>
+
+    <!-- Search Form (Desktop Only) -->
+    <form action="/myLibrary" method="get" class="search-container lg:w-80 h-9 items-center border-solid border-zinc-900 bg-slate-100 rounded-md w-9 relative mx-2 order-last lg:order-none hidden lg:flex">
+        <input id="inputSearch" required name="keyword" type="text" placeholder="Nhập từ vựng hoặc học phần..." class="flex-1 h-9 ml-2 outline-none bg-slate-100 rounded-l-md">
+        <button type="submit" class="mr-2 bg-purple-800 hover:bg-purple-600 w-7 h-7 rounded-md grid place-items-center">
+            <i class="fa-solid fa-magnifying-glass text-white"></i>
+        </button>
+    </form>
+
+    <!-- Search Icon (Mobile Only) -->
+    <button id="mobileSearchBtn" type="button" class="mr-2 bg-purple-800 hover:bg-purple-600 w-7 h-7 rounded-md grid place-items-center text-white lg:hidden">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+    <!-- Create, Upgrade, User -->
+    <div class="flex gap-4 items-center">
+        <!-- Tạo học phần -->
+        <div class="relative" id="createToggle">
+            <i class="fa-solid fa-square-plus text-2xl text-purple-800 cursor-pointer hover:text-purple-500"></i>
+            <ul class="absolute right-0 bg-white rounded-2xl mt-2 hidden" id="createContent">
+                <li class="py-2 px-4 hover:text-purple-800 cursor-pointer text-center">
+                    <a href="/createrSets">Tạo học phần</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Nâng cấp -->
+        <a href="/pay" class="py-1 px-4 bg-yellow-400 rounded-3xl lg:inline-block hidden">
+            <span class="font-medium">Nâng cấp tài khoản</span>
+        </a>
+
+        <!-- User -->
+        <div class="relative user">
+            {{#if user}}
+                <a href="#" class="flex items-center font-medium text-purple-800">
+                    <img src="{{user.avatar}}" alt="Avatar" class="w-6 h-6 rounded-full mr-2">
+                    {{user.username}}
+                </a>
+            {{else}}
+                <a href="/logIn" class="font-medium text-purple-800">
+                    <i class="fa-solid fa-user mr-1"></i>
+                    Account
+                </a>
+            {{/if}}
+
+            <div class="user__content absolute border border-solid border-inherit bg-white rounded-3xl top-7 w-40">
+                <div class="list-none py-2 px-3 hover:text-purple-800 cursor-pointer text-center">
+                    <a href="/logOut">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Modal Search Mobile -->
+<div id="mobileSearchModal" class="fixed inset-0 bg-black/40 z-50 hidden justify-center items-start pt-32 px-4">
+    <div class="bg-white w-full max-w-md p-4 rounded-lg shadow-md">
+        <form action="/myLibrary" method="get" class="flex gap-2">
+            <input required name="keyword" type="text" placeholder="Nhập từ khóa..." class="flex-1 border border-gray-300 rounded-md px-3 py-2 outline-none">
+            <button type="submit" class="bg-purple-800 text-white px-4 py-2 rounded-md hover:bg-purple-600">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/js/logIn.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/mobile.js"></script>
+

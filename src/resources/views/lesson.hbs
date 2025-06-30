@@ -1,0 +1,54 @@
+
+<div class="max-w-4xl mx-auto py-10 space-y-8">
+    <h1 class="text-3xl font-bold text-center bg-gradient-to-r from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent">
+        Học phần: {{set.set_name}}
+    </h1>
+
+    {{#each exercises}}
+    <div class="exercise {{#unless @first}}hidden{{/unless}}" data-answer="{{this.correct}}">
+        {{#if (eq this.type "fill")}}
+            <!-- Điền vào chỗ trống -->
+            <div class="bg-[#F8FAE4] p-6 rounded-lg shadow space-y-8">
+                <h2 class="text-2xl font-bold text-[#9A9C50]">"{{this.word}}" có nghĩa là:</h2>
+                <input type="text" data-answer="{{this.meaning}}" class="answer-input outline-[#9A9C50] border rounded px-3 py-2 w-full h-[40px]" placeholder="Nhập nghĩa của từ...">
+                <button class="check-btn bg-[#9A9C50] hover:bg-[#56582b] font-medium text-white px-4 py-2 rounded">Kiểm tra</button>
+                <p class="result mt-2 font-medium"></p>
+            </div>
+        {{/if}}
+
+        {{#if (eq this.type "truefalse")}}
+            <!-- Đúng/Sai -->
+            <div class="bg-[#F8FAE4] p-6 rounded-lg shadow space-y-8">
+                <h2 class="text-xl font-bold text-[#9A9C50] text-center">{{this.word}} nghĩa là "{{this.displayedMeaning}}"</h2>
+                <div class="flex justify-center space-x-4">
+                    <button class="tf-btn bg-[#9A9C50] hover:bg-[#56582b] text-white w-[120px] h-[40px] rounded font-medium" data-ans="{{this.correct}}">Đúng</button>
+                    <button class="tf-btn bg-[#9A9C50] hover:bg-[#56582b] text-white w-[120px] h-[40px] rounded font-medium" data-ans="{{not this.correct}}">Sai</button>
+                </div>
+                <p class="result mt-2 font-medium"></p>
+            </div>
+        {{/if}}
+
+        {{#if (eq this.type "multiplechoice")}}
+            <!-- Trắc nghiệm 4 đáp án -->
+            <div class="bg-[#F8FAE4] rounded-lg shadow p-6 space-y-4">
+                <p class="text-lg font-semibold text-[#9A9C50]">Chọn nghĩa đúng của từ:</p>
+                <h2 class="text-2xl font-bold text-[#9A9C50]">"{{this.word}}" có nghĩa là:</h2>
+                {{#each this.choices}}
+                    <button class="mc-btn bg-[#9A9C50] hover:bg-[#56582b] px-4 py-2 rounded w-full text-left text-[#F8FAE4] font-medium" data-ans="{{this}}">{{this}}</button>
+                {{/each}}
+                <p class="result mt-2 font-medium"></p>
+            </div>
+        {{/if}}
+    </div>
+
+    {{/each}}
+</div>
+
+<div id="congratsScreen" class="fixed inset-0 bg-white z-50 hidden flex-col justify-center items-center text-center space-y-6 px-6">
+    <img src="/img/congratulation.png" alt="Chúc mừng" class="w-[150px]">
+    <h2 class="text-3xl font-bold text-purple-700">🎉 Bạn đã hoàn thành bài học!</h2>
+    <p class="text-lg text-gray-600">Hãy ôn luyện lại để ghi nhớ lâu hơn nhé.</p>
+    <a href="/me/myLibrary" class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full font-semibold">Quay về thư viện</a>
+</div>
+
+<script src="/js/lesson.js"></script>

@@ -1,0 +1,51 @@
+<div class="bg-[#F9FBE6] w-full">
+    <div class="ml-8 flex justify-between items-center">
+        <h3 class="text-3xl pb-5 font-extrabold bg-gradient-to-t from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent leading-10">Chỉnh sửa học phần</h3>
+    </div>
+</div>
+
+<form class="bg-[#F6F7FB] pt-8 space-y-6 px-4 md:px-10 2xl:px-[150px]" method="post" enctype="multipart/form-data" action="/me/stored/sets/{{set._id}}?_method=PUT" id="createForm">
+    <div>
+        <input type="text" name="title" value="{{set.set_name}}" placeholder="Nhập tiêu đề, ví dụ từ vựng chủ đề nghề nghiệp" class="w-full max-w-[1220px] h-[48px] pl-3 outline-purple-400 rounded-md">
+    </div>
+    <div>
+        <input type="text" name="description" value="{{set.description}}" placeholder="Thêm mô tả..." class="w-full max-w-[1220px] h-[62px] pl-3 outline-purple-400 rounded-md">
+    </div>
+        <!-- thẻ tạo học phần -->
+    {{#each flashcards}}
+    <div class="w-full max-w-[1220px] bg-white rounded-md px-4 mx-auto" id="cardsContainer">
+        <div class="flex justify-between items-center p-3 relative cardWrapper">
+            <span class="font-medium">{{sum @index 1}}</span>
+            <span class="absolute w-full h-[2px] bg-[#e6e9eb] top-[40px] right-0"></span>
+            <i class="fa-solid fa-trash-can cursor-pointer"></i>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
+            <div class="relative w-full md:w-[45%]" class="card">
+                <input type="text" name="word[]" class="w-full h-[35px] outline-none" value="{{this.word}}">
+                <span class="absolute w-full h-[3px] bg-black top-[33px] left-0"></span>
+                <div class="py-4"><span class="text-[#a2a3a6]">Thuật ngữ</span></div>
+            </div>
+            <div class="relative w-full md:w-[45%]">
+                <input type="text" name="meaning[]" class="w-full h-[35px] outline-none" value="{{this.meaning}}">
+                <span class="absolute w-full h-[3px] bg-black top-[33px] left-0"></span>
+                <div class="py-4"><span class="text-[#a2a3a6]">Định nghĩa</span></div>
+            </div>
+            <div class="flex justify-center items-start">
+                <label class="cursor-pointer">
+                    <img src="{{#if this.example_img}}{{this.example_img}}{{else}}/img/createrSets_img.png{{/if}}" alt="example" class="w-[60px] imagePreview">
+                    <input type="file" accept="image/*" name="img[{{@index}}]" class="hidden fileInput">
+                    <input type="hidden" name="oldImg[]" value="{{this.example_img}}">
+                </label>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    <!-- Thêm thẻ -->
+    <div class="w-full max-w-[1220px] bg-white rounded-md px-4 mx-auto">
+        <h3 class="text-center py-8 text-xl font-semibold hover:text-purple-500 cursor-pointer" id="addCardBtn">Thêm thẻ</h3>
+    </div>
+    <div class="flex justify-end pb-8">
+        <button type="submit" class="px-4 py-2 bg-purple-800 hover:bg-purple-800/80 text-white rounded-3xl mr-3 font-semibold">Hoàn tất</button>
+    </div>
+</form> 
+<script src="/js/createrSets.js"></script>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <header class="bg-[#F9FCE7] ">
+        <a href="/home">
+            <img src="./img/logo_1.png" alt="Logo" class="w-[60px]">
+        </a>
+    </header>
+    <div class="chart-container">
+        <div class="title">Thống kê người học</div>
+        <canvas id="learnersChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <div class="title">Top người tạo học phần</div>
+        <canvas id="topCreatorsChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <div class="title">Doanh thu từ nâng cấp</div>
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+    <script>
+        const stats = {{{json stats}}};
+
+        // Biểu đồ người học
+        const learnersChart = new Chart(document.getElementById("learnersChart"), {
+            type: 'bar',
+            data: {
+                labels: ['Tuần', 'Tháng', 'Năm'],
+                datasets: [
+                    {
+                        label: 'Hiện tại',
+                        data: [stats.week.currentLearners, stats.month.currentLearners, stats.year.currentLearners],
+                        backgroundColor: '#007bff'
+                    },
+                    {
+                        label: 'Trước đó',
+                        data: [stats.week.preLearners, stats.month.preLearners, stats.year.preLearners],
+                        backgroundColor: '#ff6b6b'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Số người học' }
+                }
+            }
+        });
+
+        // Biểu đồ doanh thu
+        const revenueChart = new Chart(document.getElementById("revenueChart"), {
+            type: 'bar',
+            data: {
+                labels: ['Tuần', 'Tháng', 'Năm'],
+                datasets: [
+                    {
+                        label: 'Tổng doanh thu (VND)',
+                        data: [stats.week.totalRevenue, stats.month.totalRevenue, stats.year.totalRevenue],
+                        backgroundColor: '#28a745'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Tổng doanh thu từ nâng cấp tài khoản' }
+                }
+            }
+        });
+
+        // Biểu đồ top người tạo
+        const topNames = stats.week.topCreators.map(c => c.user.username);
+        const topCounts = stats.week.topCreators.map(c => c.count);
+
+        const topCreatorsChart = new Chart(document.getElementById("topCreatorsChart"), {
+            type: 'bar',
+            data: {
+                labels: topNames,
+                datasets: [{
+                    label: 'Số học phần tạo (tuần này)',
+                    data: topCounts,
+                    backgroundColor: '#ffc107'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Top người tạo học phần' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

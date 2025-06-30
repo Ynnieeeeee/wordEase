@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="bg-[#F9FBE6] w-full">
+        <div class="ml-8">
+            <h3 class="text-3xl font-extrabold bg-gradient-to-t from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent leading-10">Feedback</h3>
+            <span class="text-xl font-semibold bg-gradient-to-l from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent leading-9">Từ vựng chẳng khó khi có bạn đồng hành</span>
+        </div>
+    </div>
+    <form action="/feedback/store" method="post" class="mt-8 px-[65px] w-full flex">
+        <input type="text" placeholder="Viết đánh giá của bạn..." name="comment" class="flex-1 outline-none">
+        <button type="submit" class="px-4 py-2 bg-purple-800 font-medium rounded-md text-white">Gửi</button>
+    </form>
+    <div class="mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-11/12">
+
+        {{#each feedbacks}}
+        <div class="w-full h-60 bg-[linear-gradient(to_bottom_right,_rgba(127,_85,_177,_1),_rgba(255,_144,_187,_0.7))] rounded-2xl mr-2">
+            <div class="m-8">
+                <div class="flex justify-end">
+                    <span class="text-white ">{{this.created_at}}</span>
+                </div>
+                <div class=" mt-5">
+                    <span class="text-white font-medium">{{this.comment}}</span>
+                </div>
+                <div class="flex items-center justify-center mt-5">
+                    <span class="font-medium text-white">{{this.user_id.username}}</span>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="bg-black/30 fixed inset-0 z-50 hidden" id="notificationModal">
+    <div class="bg-purple-600 w-[210px] h-[210px] rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+        <div class="bg-white w-[210px] h-[210px] mx-auto rounded-2xl z-0 absolute top-6">
+            <div class="px-6 py-4 bg-[#EBEAE8] rounded-full z-[1] top-[-50px] left-16 absolute">
+                <i class="fa-solid fa-bell text-4xl text-purple-600"></i>
+            </div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+                <h3 class="text-2xl text-purple-600 font-medium">Notification</h3>
+                <span class="text-center">Bạn cần đăng nhập để gửi đánh giá</span>
+                <div class="flex">
+                    <button type="button" class="px-4 py-1 bg-gray-300 hover:bg-gray-500 text-black rounded-full closeModalBtn">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.SHOW_NOTIFICATION = {{#if showNotification}}true{{else}}false{{/if}};
+</script>
+<script src="/js/notification.js"></script>

@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9761eb64-6e96-4221-b660-6808342372ff/resourceGroups/winServer_group/providers/Microsoft.Web/sites/winserverdemo",
+    "appService.deploySubpath": "src",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}

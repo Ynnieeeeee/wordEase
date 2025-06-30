@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/fonts/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="mt-8">
+        <div class="text-center space-y-4">
+            <h2 class="text-3xl font-bold bg-gradient-to-t from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent">WordEase</h2>
+            <h3 class="text-2xl font-semibold bg-gradient-to-r from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent">Nền tảng học từ vựng hiệu quả</h3>
+        </div>
+        <!-- thông tin thanh toán -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mx-auto w-fit">
+            <div class="bg-white w-[360px] h-[360px] rounded-2xl shadow-lg border-solid border border-inherit">
+                <div class="space-y-10 py-8 px-8">
+                    <div>
+                        <h3 class="text-3xl font-bold">Theo năm</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-medium">Thanh toán 600.000 VND hàng năm. Tương đương</p>
+                        <h2 class="text-4xl font-extrabold">50.000 VND/Tháng</h2>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-yellow-300 rounded-3xl font-medium">
+                        <button class="buyBtn" data-amount="600000" data-info="Thanh toán gói năm WordEase Plus">
+                            Mua WordEase Plus
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white w-[360px] h-[360px] rounded-2xl shadow-lg border-solid border border-inherit">
+                <div class="space-y-10 py-8 px-8">
+                    <div>
+                        <h3 class="text-3xl font-bold">Theo tháng</h3>
+                    </div>
+                    <div class="space-y-11">
+                        <p class="font-medium">Thanh toán hôm nay</p>
+                        <h2 class="text-4xl font-extrabold">70.000 VND/Tháng</h2>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-yellow-300 rounded-3xl font-medium">
+                        <button class="buyBtn" data-amount="70000" data-info="Thanh toán gói tháng WordEase Plus">
+                            Mua WordEase Plus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Lợi ích việc mua WordEase Plus -->
+        <div class="mt-8">
+            <h2 class="text-center text-4xl font-bold text-[#7F55B1]">Lợi ích của việc nâng cấp lên WordEase Plus</h2>
+            <div class="py-8 lg:w-[1000px] mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 items-center">
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-bold">Ôn luyện với câu hỏi trắc nghiệm trong chế độ học</h2>
+                        <p class="text-2xl font-medium">Toàn quyền truy cập vào các chế độ học được cá nhân hóa.</p>
+                        <p class="text-2xl font-medium">Không giới hạn số lần kiểm tra.</p>
+                    </div>
+                    <div>
+                        <img src="/img/pay_1.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/vnpay.js"></script>
+</body>
+</html>

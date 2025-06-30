@@ -1,0 +1,70 @@
+<div class="bg-[#F9FBE6] w-full">
+    <div class="ml-8 flex justify-between items-center">
+        <h3 class="text-3xl pb-5 font-extrabold bg-gradient-to-t from-[#F49BAB] to-[#7F55B1] bg-clip-text text-transparent leading-10">Tạo một học phần mới</h3>
+    </div>
+</div>
+    <!--container -->
+<form class="bg-[#F6F7FB] pt-8 space-y-6 px-4 md:px-10 2xl:px-[150rpx]" method="post" enctype="multipart/form-data" action="/createrSets/store" id="createForm">
+    <div class="w-full max-w-[1220px] bg-white rounded-md mx-auto">
+        <input type="text" name="title" placeholder="Nhập tiêu đề, ví dụ từ vựng chủ đề nghề nghiệp" class="w-full max-w-[1220px] h-[48px] pl-3 outline-purple-400 rounded-md">
+    </div>
+    <div class="w-full max-w-[1220px] bg-white rounded-md mx-auto">
+        <input type="text" name="description" placeholder="Thêm mô tả..." class="w-full max-w-[1220px] h-[62px] pl-3 outline-purple-400 rounded-md">
+    </div>
+        <!-- thẻ tạo học phần -->
+    <div class="w-full max-w-[1220px] bg-white rounded-md px-4 mx-auto" id="cardsContainer">
+        <div class="flex justify-between items-center p-3 relative cardWrapper">
+            <span class="font-medium">1</span>
+            <span class="absolute w-full h-[2px] bg-[#e6e9eb] top-[40px] right-0"></span>
+            <i class="fa-solid fa-trash-can cursor-pointer"></i>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
+            <div class="relative w-full md:w-[45%]" class="card">
+                <input type="text" name="word[]" class="w-full h-[35px] outline-none">
+                <span class="absolute w-full h-[3px] bg-black top-[33px] left-0"></span>
+                <div class="py-4"><span class="text-[#a2a3a6]">Thuật ngữ</span></div>
+            </div>
+            <div class="relative w-full md:w-[45%]">
+                <input type="text" name="meaning[]" class="w-full h-[35px] outline-none">
+                <span class="absolute w-full h-[3px] bg-black top-[33px] left-0"></span>
+                <div class="py-4"><span class="text-[#a2a3a6]">Định nghĩa</span></div>
+            </div>
+            <div class="flex justify-center items-start">
+                <label class="cursor-pointer">
+                    <img src="/img/createrSets_img.png" alt="example" class="w-[60px] imagePreview">
+                    <input type="file" accept="image/*" name="img[]" class="hidden fileInput">
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- Thêm thẻ -->
+    <div class="w-full max-w-[1220px] bg-white rounded-md px-4 mx-auto">
+        <h3 class="text-center py-8 text-xl font-semibold hover:text-purple-500 cursor-pointer" id="addCardBtn">Thêm thẻ</h3>
+    </div>
+    <div class="flex justify-end pb-8">
+        <button type="submit" class="px-4 py-2 bg-purple-800 hover:bg-purple-800/80 text-white rounded-3xl mr-3 font-semibold">Tạo</button>
+    </div>
+</form>
+
+{{!-- noticatioModal --}}
+<div class="bg-black/30 fixed inset-0 z-50 hidden" id="notificationModal">
+    <div class="bg-purple-600 w-[210px] h-[210px] rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+        <div class="bg-white w-[210px] h-[210px] mx-auto rounded-2xl z-0 absolute top-6">
+            <div class="px-6 py-4 bg-[#EBEAE8] rounded-full z-[1] top-[-50px] left-16 absolute">
+                <i class="fa-solid fa-bell text-4xl text-purple-600"></i>
+            </div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 space-y-3">
+                <h3 class="text-2xl text-purple-600 font-medium">Notification</h3>
+                <span class="text-center">Bạn cần đăng nhập để tạo học phần này</span>
+                <div class="flex">
+                    <button type="button" class="px-4 py-1 bg-gray-300 hover:bg-gray-500 text-black rounded-full closeModalBtn">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.SHOW_NOTIFICATION = {{#if showNotification}}true{{else}}false{{/if}};
+</script>
+<script src="/js/createrSets.js"></script>
+<script src="/js/notification.js"></script>

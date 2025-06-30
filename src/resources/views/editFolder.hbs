@@ -1,0 +1,19 @@
+<div class="bg-black/30 fixed inset-0 z-50" id="editFolderModal">
+    <form action="/editFolder/stored/folder/{{folder._id}}?_method=PUT" method="post" class="w-[800px] h-[290px] bg-white rounded-2xl mx-auto">
+        <div class="mt-[40px] space-y-8">
+            <div class="flex justify-end">
+                <i class="closeModalBtn fa-solid fa-xmark px-4 py-4 text-2xl text-[#586380] hover:text-black cursor-pointer"></i>
+            </div>
+            <div class="px-8">
+                <h3 class="text-3xl font-semibold">Chỉnh sửa thư mục</h3>
+            </div>
+            <div>
+                <input type="text" placeholder="Tiêu đề" value="{{folder.folder_name}}" name="folder_name" class="mx-8 w-[736px] h-[46px] px-2 bg-[#F6F7FB] outline-purple-400 rounded-md relative">            
+            </div>
+            <div class="flex justify-end mr-4">
+                <button type="submit" class="px-4 py-2 bg-purple-800 rounded-3xl text-white font-medium" id="submitFolderBtn">Lưu</button>
+            </div>
+        </div>
+    </form>
+</div>
+
